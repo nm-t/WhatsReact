@@ -1,3 +1,4 @@
+<!-- https://medium.freecodecamp.org/learn-react-js-in-5-minutes-526472d292f4 -->
 <html>
 <head>
 <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
@@ -5,18 +6,40 @@
 <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
 </head>
 <body>
-	<div id="root">
-		
-	</div>
+	<div id="root"></div>
 
 	<script type="text/babel">
+	// Component
 	class Hello extends React.Component {
+		constructor() {
+			super(); // initialises `this`
+			this.state = {
+				message: "my friend (from state)"
+			};
+			this.updateMessage = this.updateMessage.bind(this);
+		}
+
+		// Method
+		updateMessage() {
+			// Modify state
+			this.setState({
+				message: "my friend (from changed state)"
+			});
+		}
+
+		// Also a method
 		render() {
-			return <h1>Hello {this.props.message}!</h1>;
+			// State (allows for data that changes, e.g.: based on user input)
+			return (<div><h1>Hello {this.state.message}!</h1>
+			<button onClick={this.updateMessage}>Click me!</button></div>);
+
+			// Prop (cannot be modified directly by component)
+			// return <h1>Hello {this.props.message}!</h1>;
 		}
 	}
 
 	ReactDOM.render(
+		// JSX
 		<Hello message="my friend" />,
 		document.getElementById("root")
 	);
